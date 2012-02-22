@@ -1,0 +1,10 @@
+development: &defaults
+  client_id: 226094160819820
+  client_secret: 82074bc2a6433ffab661acdaea378e78
+  scope: user_about_me,user_activities,user_birthday,user_education_history,
+    user_events,user_groups,user_hometown,user_interests,user_likes
+  canvas_url: http://apps.facebook.com/hamara/
+test:
+  <<: *defaults
+production:
+  <<: *defaults

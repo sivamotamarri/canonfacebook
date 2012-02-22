@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Canapp</title>
+  <%= stylesheet_link_tag :all %>
+  <%#= javascript_include_tag :defaults %>
+  <%= javascript_include_tag "jquery-1.7.1.js" %>
+  <meta property="fb:app_id" content="226094160819820" />
+  <script src="http://connect.facebook.net/en_US/all.js"></script>  
+  <%= csrf_meta_tag %>
+</head>
+<body>
+<div id="fb-root">
+  <span id ="header"><h1>Blog App</h1>
+<fb:login-button autologoutlink="true" onlogin="OnRequestPermission();" scope="user_about_me,user_activities,user_birthday,user_online_presence,user_education_history,
+    user_events,user_groups,user_hometown,user_interests,user_likes">
+</fb:login-button>
+  </span>
+  <div >
+<h3> <%= link_to 'Share your experience', '#', :id => :post_comments %> | <%= link_to 'Send Request to your friends', '#', :id => :app_request %>
+</h3></div>
+</div>
+
+<%= yield %>
+
+</body>
+</html>
+<script language="javascript" type="text/javascript">
+FB.init({appId: '226094160819820', xfbml: true, cookie: true, oauth: true});
+
+      FB.login({
+        scope: 'email,user_birthday',
+      });
+
+
+$(function () {
+
+ $('#app_request').click(function () {
+    FB.ui({
+      method: 'apprequests',
+      message: 'Hi This is my test app developed in RoR and integrated in FB',
+      data: 'Stores important links of user'
+    });
+return false;
+  });
+});
+
+   $('#post_comments').click(function () {
+
+        // calling the API ...
+        var obj = {
+          method: 'feed',
+          link: 'http://apps.facebook.com/226094160819820/',
+          picture: 'http://cdn1.iconfinder.com/data/icons/softwaredemo/PNG/256x256/User1.png',
+          name: 'User Blog App',
+          caption: 'Using RoR and FaceBook',
+          description: 'Integrated RoR app in Facebook through canvas'
+        };
+        FB.ui(obj);
+       return false;
+      });
+
+</script>
